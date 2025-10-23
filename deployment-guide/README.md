@@ -24,8 +24,7 @@ This section provides step-by-step deployment guides for deploying and configuri
 - [Networking Setup](/technical-reference/Networking.md) - Network configuration and connectivity requirements
 
 ### Testing & Validation
-- [Testing Framework](/technical-reference/Testing.md) - Comprehensive testing procedures and validation
-- [Core Connector Testing](./CoreConnectorTestingHarness.md) - Specialized testing for core connectors
+- [Core Connector Testing](./CoreConnectorTestingHarness.md) - Specialized testing for core connectors and validation procedures
 - [Technical Dashboard](/payment-manager-guide/PM4MLTechnicalDashboard.md) - Monitoring and operational dashboard for Payment Manager
 
 ## Deployment Environments

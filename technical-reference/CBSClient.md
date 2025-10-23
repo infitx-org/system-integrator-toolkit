@@ -36,7 +36,7 @@ export type TCBSConfig = {
 
 This type will eventually be used in the configuration module to enforce which environment variables must be set at run time. 
 
-For detailed configuration information, see the [Configuration](/implementation-guides/Configuration.md) guide.
+For detailed configuration information, see the [Configuration](./Configuration.md) guide.
 
 All types in this file are typescript types. For more information on types in typescript, read more from [here](https://www.typescriptlang.org/docs/handbook/basic-types.html)
 ## Errors

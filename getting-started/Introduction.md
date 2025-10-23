@@ -8,13 +8,13 @@ The SI toolkit aims to provide comprehensive documentation to facilitate an orga
 Here we have provided links to the documentation that will be relevant to a system integrator looking to address the concerns of specific stakeholders during an integration.
 
 ## Management
-This stakeholder group includes anyone in the business leadership and is responsible for business strategy and commercial decisions of the business. They are usually interested in the value proposition of a project and the commercial viability of the integration.  [Learn more](/business-integration/BusinessComercial.md)
+This stakeholder group includes anyone in the business leadership and is responsible for business strategy and commercial decisions of the business. They are usually interested in the value proposition of a project and the commercial viability of the integration.  [Learn more](../business-integration/BusinessOperations.md)
 
 ## Business Operations
-This stakeholder group is usually interested in how the integration will work from a financial perspective. They are interested in the business operations that will be involved to bring the integration alive. They will be interested in the accounting schema, integration rules, settlement and fees implementation. There is definitely an intersection between this group and what management would because the business operations team implements the priorities of management. [Learn more](/business-integration/BusinessOperations.md)
+This stakeholder group is usually interested in how the integration will work from a financial perspective. They are interested in the business operations that will be involved to bring the integration alive. They will be interested in the accounting schema, integration rules, settlement and fees implementation. There is definitely an intersection between this group and what management would because the business operations team implements the priorities of management. [Learn more](../business-integration/BusinessOperations.md)
 
 ## Technical Operations
-This stakeholder group is usually interested in the technological details involved in the integration and how to develop the integration. They will be interested in issues concerning API integration, security, technical operation of the integration, account creation. [Learn more](/technical-integration/TechnicalIntegration.md)
+This stakeholder group is usually interested in the technological details involved in the integration and how to develop the integration. They will be interested in issues concerning API integration, security, technical operation of the integration, account creation. [Learn more](../technical-integration/TechnicalIntegration.md)
 
 ## Mojaloop
 Mojaloop is an open-source software platform designed to enable the interoperability of digital financial services, particularly in emerging markets. It aims to improve financial inclusion by providing a framework that facilitates the connection of banks, mobile money operators, and other financial service providers, allowing them to interoperate seamlessly. [Learn more](https://docs.mojaloop.io/technical/)

@@ -14,7 +14,7 @@ This section provides comprehensive technical guidance for implementing Mojaloop
 
 ### Integration Architecture
 - [Technical Integration Overview](./TechnicalIntegration.md) - High-level technical architecture and integration patterns
-- [Payment Manager](./PaymentManager.md) - Core component for DFSP connectivity and transaction processing
+- [Payment Manager](../payment-manager-guide/PaymentManager.md) - Core component for DFSP connectivity and transaction processing
 - [Mojaloop Connector](./MojaloopConnector.md) - Middleware for Mojaloop communication
 
 ### Core Connector Development
