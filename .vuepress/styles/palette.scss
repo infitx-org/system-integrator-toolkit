@@ -1,0 +1,37 @@
+/**
+ * Custom palette here.
+ *
+ * ref：https://v1.vuepress.vuejs.org/zh/config/#palette-styl
+ */
+  // #04436c
+  // #454545
+  // #1980a9
+  /// #29a9d4
+ // colors
+
+
+$accentColor: #1980a9; 
+$textColor: #2c3e50;
+$borderColor: #eaecef;
+$codeBgColor: #1980a9; 
+$arrowBgColor: #ccc;
+$badgeTipColor: #29a9d4;
+$badgeWarningColor: #d6c053;
+$badgeErrorColor: #DA5961;
+$theme-color: #1980a9;
+$vp-c-accent: #1980a9;
+$vp-c-accent-bg: #1980a9;
+$vp-c-accent-hover: #29a9d4;
+$vp-c-code-tab-active: #1980a9;
+$badge-c-tip-text:#1980a9;
+
+// layout
+$navbarHeight: 3.6rem;
+$sidebarWidth: 20rem;
+$contentWidth: 740px;
+$homePageWidth: 960px;
+
+// responsive breakpoints
+$MQNarrow: 959px;
+$MQMobile: 719px;
+$MQMobileNarrow: 419px;

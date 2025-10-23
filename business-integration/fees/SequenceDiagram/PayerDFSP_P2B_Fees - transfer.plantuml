@@ -1,0 +1,35 @@
+@startuml PayerDFSP_P2B_Fees - transfer
+title Payer DFSP Transaction Fee - P2B Merchant Payment
+skinparam monochrome true
+autonumber
+
+actor "Payer" as Payer
+participant "Payer DFSP" as PayerFSP
+participant "Core Connector" as CC
+participant "Mojaloop Connector" as MC
+
+== Fee Added to Merchant Bill ==
+Payer -> PayerFSP: Confirm payment
+
+PayerFSP -> CC: PUT /merchantPayment\n(confirm transfer)
+
+CC -> MC: POST /transfers
+note left
+{
+  "transferId": "transfer-456",
+  "amount": "50500",
+  "currency": "MWK",
+  "payee": {
+    "partyIdType": "MERCHANT_ID",
+    "partyIdentifier": "MERCHANT123"
+  }
+}
+end note
+
+note over MC, CC: ... performs the rest of the transfer ...
+
+MC -> CC: Transfer successful (50500 MWK)
+CC -> PayerFSP: Transfer successful (50500 MWK)
+PayerFSP -> Payer: Payment completed\nMerchant received: 50000 MWK\nAmount sent: 680 ZMW\n**Payer DFSP fee: 6 ZMW**\nTotal paid: 686 ZMW
+
+@enduml

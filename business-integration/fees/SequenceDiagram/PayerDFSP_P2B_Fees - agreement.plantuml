@@ -1,0 +1,51 @@
+@startuml PayerDFSP_P2B_Fees - agreement
+title Payer DFSP Transaction Fee - P2B Merchant Payment
+skinparam monochrome true
+autonumber
+
+actor "Payer" as Payer
+participant "Payer DFSP" as PayerFSP
+participant "Core Connector" as CC
+participant "Mojaloop Connector" as MC
+
+== Fee Added to Merchant Bill ==
+Payer -> PayerFSP: Pay merchant bill 50000 MWK
+
+PayerFSP -> CC: POST /merchantPayment
+note left
+{
+  "amount": "50000",
+  "currency": "MWK",
+  "payee": {
+    "partyIdType": "MERCHANT_ID",
+    "partyIdentifier": "MERCHANT123"
+  }
+}
+end note
+note over MC, CC: ... performs the rest of the agreement phase ...
+
+CC -> PayerFSP: Transfer terms with all fees
+note right
+{
+  "payeeDetails": {...},
+  "sendAmount": "680.00",
+  "sendCurrency": "ZMW",
+  "receiveAmount": "50000.00",
+  "receiveCurrency": "MWK",
+  "targetFees": "1005.00",
+  "sourceFees": "0.00",
+  "transactionId": "01JKB0F2WV7YVSA6CXGP977XT9",
+  "homeTransactionId": "42fdb186-2a36-46f1-9be9-8989a9e0aeb4"
+}
+Note: sourceFees = Combined fees from Payee DFSP and FXP 
+expressed in source currency (ZMW)
+targetFees = Combined fees from Payee DFSP and FXP 
+expressed in target currency (MWK)
+In this case: 1005 MWK Merchant processing + FXP fees
+end note
+
+PayerFSP -> PayerFSP: Calculate total with **Payer DFSP fee**\n(680 ZMW + **6 ZMW** = 686 ZMW)
+
+PayerFSP -> Payer: Present complete payment terms\nMerchant bill: 50000 MWK\nAmount to send: 680 ZMW\n**Payer DFSP fee: 6 ZMW**\nMerchant processing + FXP fees: 1005 MWK\nTotal to pay: 686 ZMW
+
+@enduml

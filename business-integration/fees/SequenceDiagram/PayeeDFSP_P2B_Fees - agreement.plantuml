@@ -1,0 +1,60 @@
+@startuml PayeeDFSP_P2B_Fees - agreement
+title Payee DFSP Transaction Fee - P2B Merchant Payment
+skinparam monochrome true
+autonumber
+
+participant "Mojaloop Connector" as MC
+participant "Core Connector" as CC
+participant "Payee DFSP" as PayeeFSP
+actor "Merchant" as Merchant
+
+== Incoming Payment Request ==
+note over MC: Incoming payment request from Payer DFSP\nfor merchant payment
+
+MC -> CC: POST /quoterequests
+note left
+{
+  "quoteId": "382987...8c1727",
+  "transactionId": "d9ce59...51451",
+  "payee": {
+    "partyIdInfo": {
+      "partyIdType": "MERCHANT_ID",
+      "partyIdentifier": "MERCHANT789",
+      "fspId": "payeeDFSP"
+    }
+  },
+  "amountType": **"RECEIVE"**,
+  "amount": {
+    "amount": "50000",
+    "currency": "MWK"
+  }
+}
+end note
+
+note over CC: Core Connector processes quote request\nand calculates Payee DFSP fees
+
+CC -> PayeeFSP: Quote merchant for payment
+PayeeFSP -> PayeeFSP: Calculate processing fee\n(**500 MWK** on 50000 MWK)
+
+PayeeFSP -> CC: Quote response with fees
+
+CC -> MC: Quote response with Payee DFSP fees
+note right
+{
+  "expiration": "2025-08-05T12:30:00.000Z",
+  **"payeeFspFeeAmount": "500",**
+  **"payeeFspFeeAmountCurrency": "MWK",**
+  "payeeReceiveAmount": "50000",
+  "payeeReceiveAmountCurrency": "MWK",
+  "quoteId": "382987...8c1727",
+  "transactionId": "d9ce59...51451",
+  "transferAmount": "50500",
+  "transferAmountCurrency": "MWK"
+}
+Note: Merchant receives 50000 = 50500 **- 500** MWK
+payeeFspFeeAmount = processing fee
+end note
+
+note over MC: ... performs quote and transfer process ...
+
+@enduml

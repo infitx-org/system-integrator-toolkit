@@ -1,0 +1,52 @@
+@startuml PayerDFSP_P2P_Fees - agreement
+title Payer DFSP Transaction Fee - P2P Send Money
+skinparam monochrome true
+autonumber
+
+actor "Payer" as Payer
+participant "Payer DFSP" as PayerFSP
+participant "Core Connector" as CC
+participant "Mojaloop Connector" as MC
+
+== Fee Deduction Before Hub ==
+Payer -> PayerFSP: Send 500 ZMW to MSISDN 987654321
+PayerFSP -> PayerFSP: **Calculate transaction fee (5 ZMW)**
+PayerFSP -> PayerFSP: Deduct fee from amount\n(500 **- 5** = 495 ZMW)
+
+PayerFSP -> CC: POST /sendmoney
+note left
+{
+  "amount": "495",
+  "currency": "ZMW",
+  "payee": {
+    "partyIdType": "MSISDN",
+    "partyIdentifier": "987654321"
+  }
+}
+end note
+note over MC, CC: ... performs the rest of the agreement phase ...
+
+CC -> PayerFSP: Transfer terms with all fees
+note right
+{
+  "payeeDetails": {...},
+  "sendAmount": "495.00",
+  "sendCurrency": "ZMW",
+  "receiveAmount": "36387.00",
+  "receiveCurrency": "MWK",
+  "targetFees": "738.00",
+  "sourceFees": "0.00",
+  "transactionId": "01JKB0F2WV7YVSA6CXGP977XT9",
+  "homeTransactionId": "42fdb186-2a36-46f1-9be9-8989a9e0aeb4"
+}
+Note: sourceFees = Combined fees from Payee DFSP and FXP 
+expressed in source currency (ZMW)
+targetFees = Combined fees from Payee DFSP and FXP 
+expressed in target currency (MWK)
+In this case: 738 MWK Payee DFSP + FXP fees
+end note
+
+PayerFSP -> Payer: Present complete transfer terms\nAmount to send: 500 ZMW\n**Payer DFSP fee: 5 ZMW**\nPayee DFSP + FXP fees: 738 MWK\nTotal fees: 738 MWK and 5 ZMW\nPayee will receive: 36387 MWK
+
+
+@enduml

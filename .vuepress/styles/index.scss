@@ -1,0 +1,56 @@
+:root {
+  --vp-c-accent: #1980a9;
+  --vp-c-accent-bg: #1980a9;
+  --vp-c-accent-hover: #29a9d4;
+  --vp-c-code-tab-active: #1980a9;
+  --badge-c-tip-text:#1980a9;
+
+
+  // Home Page
+  --home-hero-img-max-width: 450px;
+  --home-feature-max-width: 33%;
+  --home-hero-description-color: #000000;
+  --home-hero-description-max-width: 720px;
+  --home-hero-main-title-display: none;
+
+  // Navbar
+  --navbar-site-name-display: none;
+
+  // Uncommented styles
+   --home-margin-top: 56px;
+   --navbar-top: 55px;
+   --main-content-wrapper-margin-top: 75px;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-family-primary);
+}
+
+h5 {
+  font-size: var(--font-size-h5);
+} 
+
+p {
+  font-family: var(--font-family-secondary);
+} 
+
+.home .hero img {
+  max-width: var(--home-hero-img-max-width) !important;
+}
+
+.home .feature {
+  max-width: var(--home-feature-max-width) !important;
+}
+
+.home .hero .description {
+  color: var(--home-hero-description-color) !important;
+  max-width: var(--home-hero-description-max-width) !important;
+}
+
+.navbar .site-name {
+  display: var(--navbar-site-name-display);
+}
+
+.home .hero #main-title {
+  display: var(--home-hero-main-title-display);
+}

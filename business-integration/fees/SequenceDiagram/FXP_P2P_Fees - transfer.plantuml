@@ -1,0 +1,23 @@
+@startuml FXP_P2P_Fees - transfer
+title FXP Transaction Fee - P2P Send Money with Currency Conversion
+skinparam monochrome true
+autonumber
+
+participant "Mojaloop Connector" as MC
+participant "Core Connector" as CC
+participant "FXP" as FXP
+
+== Incoming FX Conversion Request ==
+note over MC: Agreement in place; executing FX conversion request\nfor P2P send money (ZMW → MWK)
+
+MC -> CC: POST /fxTransfer
+CC -> FXP: Execute conversion\n495 ZMW → 36754 MWK
+
+FXP -> FXP: Perform currency conversion\n**Deduct FXP fee: 371 MWK**\nConvert: 495 ZMW → 37125 MWK\nFinal output: 36754 MWK
+
+FXP -> CC: Conversion completed
+CC -> MC: FX conversion successful
+
+note over FXP: FXP earns **371 MWK fee**\nfor converting 495 ZMW to 37125 MWK\n(net 36754 MWK to recipient)
+
+@enduml

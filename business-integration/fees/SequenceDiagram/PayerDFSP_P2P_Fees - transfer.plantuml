@@ -1,0 +1,31 @@
+@startuml PayerDFSP_P2P_Fees - transfer
+title Payer DFSP Transaction Fee - P2P Send Money
+skinparam monochrome true
+autonumber
+
+actor "Payer" as Payer
+participant "Payer DFSP" as PayerFSP
+participant "Core Connector" as CC
+participant "Mojaloop Connector" as MC
+
+== Fee Deduction Before Hub ==
+
+Payer -> PayerFSP: Accept terms
+
+PayerFSP -> CC: PUT /sendmoney\n(confirm transfer)
+note left
+{
+  "acceptQuote": true,
+  "homeTransactionId": "HTX123456789"
+}
+end note
+
+CC -> MC: PUT /transfers
+
+note over MC, CC: ... performs the rest of the transfer ...
+
+MC -> CC: Transfer successful (495 ZMW)
+CC -> PayerFSP: Transfer successful (495 ZMW)
+PayerFSP -> Payer: Transfer completed\nSent: 495 ZMW\n**Fee: 5 ZMW**\nTotal: 500 ZMW
+
+@enduml

@@ -1,0 +1,26 @@
+@startuml PayeeDFSP_P2B_Fees - transfer
+title Payee DFSP Transaction Fee - P2B Merchant Payment
+skinparam monochrome true
+autonumber
+
+participant "Mojaloop Connector" as MC
+participant "Core Connector" as CC
+participant "Payee DFSP" as PayeeFSP
+actor "Merchant" as Merchant
+
+== Incoming Payment Request ==
+note over MC: Agreement in place; executing incoming \npayment request from Payer DFSP\nfor merchant payment
+
+MC -> CC: Transfer execution
+CC -> PayeeFSP: Credit merchant account\nAmount: 50500 MWK
+
+PayeeFSP -> PayeeFSP: Debit processing fee: **500 MWK**\nfrom merchant account
+
+PayeeFSP -> Merchant: Credit 50000 MWK\n(Processing fee **500 MWK** deducted)
+
+PayeeFSP -> CC: Transfer completed
+CC -> MC: Transfer successful
+
+note over Merchant: Merchant receives 50000 MWK\n(50500 MWK **- 500 MWK** processing fee)
+
+@enduml

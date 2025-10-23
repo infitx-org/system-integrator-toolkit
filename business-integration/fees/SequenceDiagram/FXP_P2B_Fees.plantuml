@@ -1,0 +1,78 @@
+@startuml FXP_P2B_Fees
+title FXP Transaction Fee - P2B Merchant Payment with Currency Conversion
+skinparam monochrome true
+autonumber
+
+participant "Mojaloop Connector" as MC
+participant "Core Connector" as CC
+participant "FXP" as FXP
+
+== Incoming FX Conversion Request ==
+note over MC: Incoming FX conversion request\nfor merchant payment (ZMW → MWK)
+
+MC -> CC: POST /fxQuotes
+note left
+{
+  "conversionRequestId": "b51ec534-...",
+  "conversionTerms": {
+    ...
+    "amountType": "RECEIVE",
+    "sourceAmount": {
+      "currency": "ZMW"
+    },
+    "targetAmount": {
+      "currency": "MWK",
+      "amount": "50500.00"
+    },
+    "expiration": "2025-08-05T12:30:00.000Z"
+  }
+}
+end note
+
+note over CC: Core Connector processes FX quote request\nand calculates FXP fees
+
+CC -> FXP: Request FX conversion quote
+FXP -> FXP: Calculate conversion with fees\nExchange rate: 1.18 MWK/ZMW\n**FXP fee: 100 ZMW**
+
+FXP -> CC: FX quote response with fees
+
+CC -> MC: FX quote response with conversion terms
+note right
+{
+  "homeTransactionId": "42fdb186-...",
+  "conversionTerms": {
+     ...
+    "amountType": "RECEIVE",
+    "sourceAmount": {
+      "currency": "ZMW",
+      "amount": "680.00"
+    },
+    "targetAmount": {
+      "currency": "MWK",
+      "amount": "50500.00"
+    },
+    "expiration": "2025-08-05T12:30:00.000Z",
+    "charges": [
+      {
+        "chargeType": "FX_CONVERSION",
+        "sourceAmount": {
+          **"currency": "MWK",**
+          **"amount": "505.00"**
+}}]}}
+Note: Source amount includes FXP fee
+((50500 MWK **+ 505MWK fee** ) ÷ 75 = 680 ZMW)
+end note
+
+note over MC: ... performs quote and transfer process ...
+
+MC -> CC: FX conversion execution
+CC -> FXP: Execute conversion\n680 ZMW → 51005 MWK
+
+FXP -> FXP: Perform currency conversion\n**Deduct FXP fee: 505 MWK**\nConvert: 680 ZMW → 50500 MWK
+
+FXP -> CC: Conversion completed
+CC -> MC: FX conversion successful
+
+note over FXP: FXP earns **505 MWK fee**\nfor converting 680 ZMW to 51005 MWK
+
+@enduml

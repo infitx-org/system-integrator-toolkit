@@ -1,0 +1,26 @@
+@startuml PayeeDFSP_P2P_Fees - transfer
+title Payee DFSP Transaction Fee - P2P Send Money
+skinparam monochrome true
+autonumber
+
+participant "Mojaloop Connector" as MC
+participant "Core Connector" as CC
+participant "Payee DFSP" as PayeeFSP
+actor "Payee" as Payee
+
+== Incoming Payment Request ==
+note over MC: Agreement in place; executing incoming \npayment request from Payer DFSP\nfor P2P send money
+
+MC -> CC: Transfer execution
+CC -> PayeeFSP: Credit payee account\nAmount: 36754 MWK
+
+PayeeFSP -> PayeeFSP: Debit receiving fee: **367 MWK**\nfrom payee account
+
+PayeeFSP -> Payee: Credit 36387 MWK\n(Receiving fee 367 MWK deducted)
+
+PayeeFSP -> CC: Transfer completed
+CC -> MC: Transfer successful
+
+note over Payee: Payee receives 36387 MWK\n(36754 MWK **- 367 MWK** receiving fee)
+
+@enduml

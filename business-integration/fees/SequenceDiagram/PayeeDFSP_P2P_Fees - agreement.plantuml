@@ -1,0 +1,60 @@
+@startuml PayeeDFSP_P2P_Fees - agreement
+title Payee DFSP Transaction Fee - P2P Send Money
+skinparam monochrome true
+autonumber
+
+participant "Mojaloop Connector" as MC
+participant "Core Connector" as CC
+participant "Payee DFSP" as PayeeFSP
+actor "Payee" as Payee
+
+== Incoming Payment Request ==
+note over MC: Incoming payment request from Payer DFSP\nfor P2P send money
+
+MC -> CC: POST /quoterequests
+note left
+{
+  "quoteId": "382987...8c1727",
+  "transactionId": "d9ce59...51451",
+  "payee": {
+    "partyIdInfo": {
+      "partyIdType": "MSISDN",
+      "partyIdentifier": "+1234567890",
+      "fspId": "payeeDFSP"
+    }
+  },
+  "amountType": **"SEND"**,
+  "amount": {
+    "amount": "36754",
+    "currency": "MWK"
+  }
+}
+end note
+
+note over CC: Core Connector processes quote request\nand calculates Payee DFSP fees
+
+CC -> PayeeFSP: Quote payee for transfer
+PayeeFSP -> PayeeFSP: **Calculate receiving fee (367 MWK)**
+
+PayeeFSP -> CC: Quote response with fees
+
+CC -> MC: Quote response with Payee DFSP fees
+note right
+{
+  "expiration": "2025-08-05T12:30:00.000Z",
+  **"payeeFspFeeAmount": "367",**
+  **"payeeFspFeeAmountCurrency": "MWK",**
+  "payeeReceiveAmount": "36387",
+  "payeeReceiveAmountCurrency": "MWK",
+  "quoteId": "382987...8c1727",
+  "transactionId": "d9ce59...51451",
+  "transferAmount": "36754",
+  "transferAmountCurrency": "MWK"
+}
+Note: After conversion and fees:
+Payee receives 36754 **- 367** = 36387 MWK
+payeeFspFeeAmount = **367 MWK**
+end note
+
+note over MC: ... performs quote and transfer process ...
+@enduml

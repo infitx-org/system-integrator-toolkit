@@ -1,0 +1,69 @@
+@startuml FXP_P2P_Fees - agreement
+title FXP Transaction Fee - P2P Send Money with Currency Conversion
+skinparam monochrome true
+autonumber
+
+participant "Mojaloop Connector" as MC
+participant "Core Connector" as CC
+participant "FXP" as FXP
+
+== Incoming FX Conversion Request ==
+note over MC: Incoming FX conversion request\nfor P2P send money (ZMW → MWK)
+
+MC -> CC: POST /fxQuotes
+note left
+{
+  "conversionRequestId": "b51ec534-...",
+  "conversionTerms": {
+    ...
+    "amountType": "SEND",
+    "sourceAmount": {
+      "currency": "ZMW",
+      "amount": "495.00"
+    },
+    "targetAmount": {
+      "currency": "MWK"
+    },
+    "expiration": "2025-08-05T12:30:00.000Z"
+  }
+}
+end note
+
+note over CC: Core Connector processes FX quote request\nand calculates FXP fees
+
+CC -> FXP: Request FX conversion quote
+FXP -> FXP: Calculate conversion with fees\nExchange rate: 75 MWK/ZMW\n**FXP fee: 371 MWK**
+
+FXP -> CC: FX quote response with fees
+
+CC -> MC: FX quote response with conversion terms
+note right
+{
+  "homeTransactionId": "42fdb186-...",
+  "conversionTerms": {
+    ...
+    "amountType": "SEND",
+    "sourceAmount": {
+      "currency": "ZMW",
+      "amount": "495.00"
+    },
+    "targetAmount": {
+      "currency": "MWK",
+      "amount": "36754.00"
+    },
+    "expiration": "2025-08-05T12:30:00.000Z",
+    "charges": [{
+        "chargeType": "FX_CONVERSION",
+        "sourceAmount": {
+          **"currency": "MWK",**
+          **"amount": "371.00"**
+}}]}
+Note: Target amount after FXP fee deduction
+(495 ZMW × 75 = 37125 MWK - **371 MWK fee** = 36754 MWK)
+end note
+
+
+note over MC: ... performs quote and transfer process ...
+
+
+@enduml
