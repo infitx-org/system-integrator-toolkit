@@ -1,7 +1,7 @@
 ---
 home: true
 title: Home
-#heroImage: https://www.infitx.com/wp-content/uploads/2022/11/INFITX-Name-and-Text-Cropped--1024x344.png
+heroImage: /images/INFITX-Africa.png
 
 actions:
   - text: Getting Started
@@ -30,11 +30,11 @@ features:
     link: /advanced-topics/
     details: Explore sophisticated integration patterns, FX conversion, and complex business scenarios for enterprise-grade implementations.  
 
-footer:  v1.1 WIP
+footer: Powered by Infitx Africa in partnership with Mojaloop Foundation | v1.1 WIP
 ---
 # System Integrator Toolkit
 
-Welcome to the comprehensive System Integrator Toolkit for Mojaloop integration. This toolkit provides role-based guidance and resources for Digital Financial Service Providers (DFSPs) and their integration partners.
+Welcome to the comprehensive System Integrator Toolkit for Mojaloop integration, powered by **Infitx Africa** in partnership with the **Mojaloop Foundation**. This toolkit provides role-based guidance and resources for Digital Financial Service Providers (DFSPs) and their integration partners across Africa and beyond.
 
 ## Quick Navigation by Role
 
@@ -54,5 +54,18 @@ Welcome to the comprehensive System Integrator Toolkit for Mojaloop integration.
 
 Choose your path based on your role and current phase in the integration journey.
 
+---
 
-[default-theme-home]: https://www.infitx.com/wp-content/uploads/2022/11/cropped-INFITX-Icon-White-Cropped-270x270.png#home-page
+<div style="text-align: center; padding: 2rem 0; border-top: 1px solid #eee; margin-top: 2rem;">
+  <div style="display: flex; align-items: center; justify-content: center; gap: 30px; margin-bottom: 1rem; flex-wrap: wrap;">
+    <img src="/images/INFITX-Africa.png" alt="Infitx Africa" style="height: 50px; max-width: 200px; object-fit: contain;" />
+    <span style="font-size: 24px; color: #666; font-weight: bold;">×</span>
+    <img src="/images/MojaloopFoundation.svg" alt="Mojaloop Foundation" style="height: 50px; max-width: 200px; object-fit: contain;" />
+  </div>
+  <p style="margin: 0; color: #666; font-size: 1rem;">
+    <strong>Powered by Infitx Africa in partnership with Mojaloop Foundation</strong>
+  </p>
+  <p style="margin: 0.5rem 0 0 0; color: #999; font-size: 0.9rem;">
+    Enabling financial inclusion across Africa and beyond
+  </p>
+</div>

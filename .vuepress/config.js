@@ -14,8 +14,13 @@ export default defineUserConfig({
 
 
   theme: defaultTheme({
-    logo: 'https://www.infitx.com/wp-content/uploads/2022/11/cropped-INFITX-Icon-White-Cropped-270x270.png',
+    logo: '/images/INFITX-Africa.png',
+    logoDark: '/images/INFITX-Africa.png',
+    logoAlt: 'Infitx Africa - System Integrator Toolkit',
     sidebarDepth: 3,
+    editLink: false,
+    lastUpdated: true,
+    contributors: false,
     navbar: [
       {
         text: 'Getting Started',
@@ -40,6 +45,11 @@ export default defineUserConfig({
       {
         text: 'Technical Reference',
         link: '/technical-reference/',
+      },
+      {
+        text: 'Mojaloop',
+        link: 'https://mojaloop.io/',
+        icon: 'svg:https://mojaloop.io/wp-content/uploads/2025/03/FullLogo_Standard_RGB.svg'
       }
     ],
     sidebar: {
@@ -196,4 +206,12 @@ export default defineUserConfig({
     viteOptions: {},
     vuePluginOptions: {},
   }),
+
+  head: [
+    ['link', { rel: 'icon', href: '/images/INFITX-Africa.png' }],
+    ['meta', { name: 'theme-color', content: '#1e3a8a' }],
+    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
+    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
+    ['meta', { name: 'msapplication-TileColor', content: '#1e3a8a' }]
+  ],
 })

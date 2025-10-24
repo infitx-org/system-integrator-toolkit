@@ -1,0 +1,120 @@
+/* Custom branding styles for Infitx Africa x Mojaloop documentation */
+
+/* Navbar logo styling */
+.navbar .navbar-brand img,
+.navbar-brand img {
+  height: 32px;
+  width: auto;
+  max-width: 120px;
+}
+
+/* Mojaloop navbar icon - handled by client script */
+
+/* Hero section logo styling */
+.hero img {
+  max-height: 120px;
+  width: auto;
+  margin-bottom: 1rem;
+}
+
+/* Footer and partnership branding styling */
+.page-meta + .page-nav + .footer {
+  text-align: center;
+  padding: 2rem 0;
+  border-top: 1px solid var(--c-border);
+  margin-top: 2rem;
+}
+
+.footer img {
+  max-height: 40px;
+  width: auto;
+  vertical-align: middle;
+}
+
+/* Home page partnership section */
+.home .partnership-logos img {
+  height: 50px;
+  max-width: 200px;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .home .partnership-logos img {
+    height: 40px;
+    max-width: 150px;
+  }
+  
+  .home .partnership-logos span {
+    display: none;
+  }
+}
+
+/* Custom brand colors */
+:root {
+  --c-brand: #1e3a8a; /* Infitx blue */
+  --c-brand-light: #3b82f6;
+}
+
+/* Enhanced navbar styling */
+.navbar {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Home page hero customization */
+.home .hero {
+  padding: 4rem 0 2rem;
+}
+
+.home .hero h1 {
+  font-size: 3rem;
+  color: var(--c-brand);
+  margin-bottom: 1rem;
+}
+
+.home .hero .description {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+/* Feature cards styling */
+.home .features {
+  margin-top: 3rem;
+}
+
+.home .feature {
+  transition: transform 0.2s ease-in-out;
+}
+
+.home .feature:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Button styling */
+.action-button.primary {
+  background-color: var(--c-brand);
+  border-color: var(--c-brand);
+}
+
+.action-button.primary:hover {
+  background-color: var(--c-brand-light);
+  border-color: var(--c-brand-light);
+}
+
+/* Footer responsive design */
+@media (max-width: 768px) {
+  .footer img {
+    max-height: 30px;
+    margin: 0 10px;
+  }
+  
+  .footer div {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  
+  .footer span {
+    display: none;
+  }
+}
